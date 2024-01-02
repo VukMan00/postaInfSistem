@@ -246,11 +246,11 @@ public class SaveKorisnik extends javax.swing.JDialog {
             try{
                 Controller.getInstance().addKorisnik(korisnik);
                 JOptionPane.showMessageDialog(this, "Upesno kreiran korisnik");
+                this.dispose();
             } catch (Exception ex) {
                 try {
                     Controller.getInstance().deleteBrojUlice(brojUlice);
                     Controller.getInstance().deleteAdresa(adresa);
-                    Controller.getInstance().deleteMesto(mesto);
                     JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);
                 } catch (Exception ex1) {
                     JOptionPane.showMessageDialog(null, ex1.getMessage(), "Exception1", JOptionPane.PLAIN_MESSAGE);
@@ -260,6 +260,7 @@ public class SaveKorisnik extends javax.swing.JDialog {
             try {
                 Controller.getInstance().updateKorisnik(korisnik);
                 JOptionPane.showMessageDialog(this, "Upesno ažuriran korisnik");
+                this.dispose();
             } catch (Exception ex) {
                 Logger.getLogger(SaveKorisnik.class.getName()).log(Level.SEVERE, null, ex);
             }

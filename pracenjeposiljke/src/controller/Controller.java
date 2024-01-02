@@ -368,6 +368,12 @@ public class Controller {
         response = (Response) receiver.receive();
     }
     
+    public void addVozac(Vozac vozac) throws Exception{
+        request = new Request(Operation.ADD, vozac);
+        sender.send(request);
+        response = (Response) receiver.receive();
+    }
+    
     public void updateKorisnik(Korisnik korisnik) throws Exception {
         request = new Request(Operation.UPDATE, korisnik);
         sender.send(request);
@@ -400,6 +406,12 @@ public class Controller {
     
     public void updateUpravlja(Upravlja upravlja) throws Exception{
         request = new Request(Operation.UPDATE, upravlja);
+        sender.send(request);
+        response = (Response)receiver.receive();
+    }
+    
+    public void updateVozac(Vozac vozac) throws Exception{
+        request = new Request(Operation.UPDATE, vozac);
         sender.send(request);
         response = (Response)receiver.receive();
     }

@@ -4,7 +4,6 @@
  */
 package domain;
 
-import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -61,6 +60,33 @@ public class Vozac implements GenericEntity{
     public void setTrenutnaLinija(String trenutnaLinija) {
         this.trenutnaLinija = trenutnaLinija;
     }
+    
+    @Override
+    public String toString() {
+        return imePrezime;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.sifraVozaca);
+        return hash;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Vozac other = (Vozac) obj;
+        return Objects.equals(this.sifraVozaca, other.sifraVozaca);
+    } 
 
     @Override
     public String getSelectValues() {
@@ -95,33 +121,6 @@ public class Vozac implements GenericEntity{
     }
 
     @Override
-    public String toString() {
-        return imePrezime;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 41 * hash + Objects.hashCode(this.sifraVozaca);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Vozac other = (Vozac) obj;
-        return Objects.equals(this.sifraVozaca, other.sifraVozaca);
-    }    
-
-    @Override
     public String getWhereCondition() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
@@ -133,22 +132,27 @@ public class Vozac implements GenericEntity{
 
     @Override
     public String getColumnNamesForInsert() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "sifraVozaca,imePrezime";
     }
 
     @Override
     public String getInsertValues() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        StringBuilder sb = new StringBuilder();
+        sb.append(sifraVozaca).append(",")
+          .append("'").append(imePrezime).append("'");
+        return sb.toString();
     }
 
     @Override
     public String getUpdateSetValues() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        StringBuilder sb = new StringBuilder();
+        sb.append("imePrezime='").append(imePrezime).append("'");
+        return sb.toString();
     }
 
     @Override
     public String getUpdateCondition() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "sifraVozaca="+sifraVozaca;
     }
 
     @Override

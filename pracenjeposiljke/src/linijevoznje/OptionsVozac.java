@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import linijevoznje.vozac.SaveVozac;
 import session.LocalStorage;
 import tableModels.VozacTableModel;
 
@@ -76,6 +77,11 @@ public class OptionsVozac extends javax.swing.JDialog {
 
         btnUpdateVozac.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         btnUpdateVozac.setText("Ažuriraj vozača");
+        btnUpdateVozac.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateVozacActionPerformed(evt);
+            }
+        });
 
         btnOptionsUpravljaLinijama.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         btnOptionsUpravljaLinijama.setText("Upravljanje linijama");
@@ -140,7 +146,28 @@ public class OptionsVozac extends javax.swing.JDialog {
 
     private void btnCreateVozacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateVozacActionPerformed
         // TODO add your handling code here:
+        localStorage.addItemsInHashMap("operation", "CREATE");
+        SaveVozac sv = new SaveVozac(null, true);
+        sv.setLocationRelativeTo(null);
+        sv.setVisible(true);
+        populateTable();
+        localStorage.removeItemFromHashMap("operation");
     }//GEN-LAST:event_btnCreateVozacActionPerformed
+
+    private void btnUpdateVozacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateVozacActionPerformed
+        // TODO add your handling code here:
+        vozac = getSelectedVozac();
+        if(vozac!=null){
+            localStorage.addItemsInHashMap("vozac", vozac);
+            localStorage.addItemsInHashMap("operation", "UPDATE");
+            SaveVozac sv = new SaveVozac(null, true);
+            sv.setLocationRelativeTo(null);
+            sv.setVisible(true);
+            populateTable();
+            localStorage.removeItemFromHashMap("operation");
+            localStorage.removeItemFromHashMap("vozac");
+        }
+    }//GEN-LAST:event_btnUpdateVozacActionPerformed
 
 
 

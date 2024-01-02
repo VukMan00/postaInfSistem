@@ -32,7 +32,9 @@ import repository.upravljanjelinijama.AddUpravljanje;
 import repository.upravljanjelinijama.DeleteUpravlja;
 import repository.upravljanjelinijama.GetAllUpravljanja;
 import repository.upravljanjelinijama.UpdateUpravlja;
+import repository.vozac.AddVozac;
 import repository.vozac.GetAllVozac;
+import repository.vozac.UpdateVozac;
 import repository.vrece.*;
 
 /**
@@ -102,6 +104,7 @@ public class Controller {
         if(object instanceof Razduzuje) addRazduzuje(object);
         if(object instanceof Otpremnica) addOtpremnica(object);
         if(object instanceof Upravlja) addUpravlja(object);
+        if(object instanceof Vozac) addVozac(object);
     }
     
     public void update(Object object) throws Exception{
@@ -111,6 +114,7 @@ public class Controller {
         if(object instanceof DostavniSpisak) updateDostavniSpisak(object);
         if(object instanceof Otpremnica) updateOtpremnica(object);
         if(object instanceof Upravlja) updateUpravlja(object);
+        if(object instanceof Vozac) updateVozac(object);
     }
     
     public void delete(Object object) throws Exception{
@@ -300,8 +304,18 @@ public class Controller {
         operation.execute(argument);
     }
     
+    private void addVozac(Object argument) throws Exception{
+        operation = new AddVozac();
+        operation.execute(argument);
+    }
+    
     private void addUpravlja(Object argument) throws Exception{
         operation = new AddUpravljanje();
+        operation.execute(argument);
+    }
+    
+    private void updateVozac(Object argument) throws Exception{
+        operation = new UpdateVozac();
         operation.execute(argument);
     }
         
