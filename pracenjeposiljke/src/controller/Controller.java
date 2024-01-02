@@ -374,6 +374,12 @@ public class Controller {
         response = (Response) receiver.receive();
     }
     
+    public void addLinija(Linija linija) throws Exception{
+        request = new Request(Operation.ADD, linija);
+        sender.send(request);
+        response = (Response) receiver.receive();
+    }
+    
     public void updateKorisnik(Korisnik korisnik) throws Exception {
         request = new Request(Operation.UPDATE, korisnik);
         sender.send(request);
@@ -412,6 +418,12 @@ public class Controller {
     
     public void updateVozac(Vozac vozac) throws Exception{
         request = new Request(Operation.UPDATE, vozac);
+        sender.send(request);
+        response = (Response)receiver.receive();
+    }
+    
+    public void updateLinija(Linija linija) throws Exception{
+        request = new Request(Operation.UPDATE, linija);
         sender.send(request);
         response = (Response)receiver.receive();
     }

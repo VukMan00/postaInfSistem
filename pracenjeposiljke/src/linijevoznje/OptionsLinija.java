@@ -4,6 +4,17 @@
  */
 package linijevoznje;
 
+import controller.Controller;
+import domain.Linija;
+import java.io.IOException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import linijevoznje.linija.SaveLinija;
+import session.LocalStorage;
+import tableModels.LinijaTableModel;
+
 /**
  *
  * @author Vuk
@@ -13,9 +24,14 @@ public class OptionsLinija extends javax.swing.JDialog {
     /**
      * Creates new form OptionsLinija
      */
+    private final LocalStorage localStorage = LocalStorage.getInstance();
+    private List<Linija> linije;
+    private Linija linija;
+    
     public OptionsLinija(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setComponents();
     }
 
     /**
@@ -27,64 +43,135 @@ public class OptionsLinija extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblLinije = new javax.swing.JTable();
+        btnCreateLinijać = new javax.swing.JButton();
+        btnUpdateLinija = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Arial", 3, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Linije za prenos pošiljaka");
+
+        tblLinije.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblLinije);
+
+        btnCreateLinijać.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnCreateLinijać.setText("Kreiraj liniju");
+        btnCreateLinijać.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateLinijaćActionPerformed(evt);
+            }
+        });
+
+        btnUpdateLinija.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnUpdateLinija.setText("Ažuriraj liniju");
+        btnUpdateLinija.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateLinijaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(88, 88, 88)
+                .addComponent(btnCreateLinijać, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(btnUpdateLinija, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCreateLinijać)
+                    .addComponent(btnUpdateLinija))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(OptionsLinija.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(OptionsLinija.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(OptionsLinija.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(OptionsLinija.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void btnCreateLinijaćActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateLinijaćActionPerformed
+        // TODO add your handling code here:
+        localStorage.addItemsInHashMap("operation", "CREATE");
+        SaveLinija sl = new SaveLinija(null, true);
+        sl.setLocationRelativeTo(null);
+        sl.setVisible(true);
+        localStorage.removeItemFromHashMap("operation");
+        populateTable();
+    }//GEN-LAST:event_btnCreateLinijaćActionPerformed
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                OptionsLinija dialog = new OptionsLinija(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+    private void btnUpdateLinijaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateLinijaActionPerformed
+        // TODO add your handling code here:
+        Linija linija = getSelectedLinija();
+        if(linija!=null){
+            localStorage.addItemsInHashMap("operation", "UPDATE");
+            localStorage.addItemsInHashMap("linija", linija);
+            SaveLinija sl = new SaveLinija(null, true);
+            sl.setLocationRelativeTo(null);
+            sl.setVisible(true);
+            localStorage.removeItemFromHashMap("operation");
+            localStorage.removeItemFromHashMap("linija");
+            populateTable();
+        }
+    }//GEN-LAST:event_btnUpdateLinijaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCreateLinijać;
+    private javax.swing.JButton btnUpdateLinija;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblLinije;
     // End of variables declaration//GEN-END:variables
+
+    private void setComponents() {
+        populateTable();
+    }
+
+    private void populateTable() {
+        try {
+            linije = Controller.getInstance().getLinije(new Linija());
+            tblLinije.setModel(new LinijaTableModel(linije));
+        } catch (Exception ex) {
+            Logger.getLogger(OptionsLinija.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private Linija getSelectedLinija() {
+        int selectedRow = tblLinije.getSelectedRow();
+        if(selectedRow == -1){
+            JOptionPane.showMessageDialog(this, "Niste izabrali liniju");
+            return null;
+        }else{
+            return ((LinijaTableModel) tblLinije.getModel()).getLinije().get(selectedRow);
+        }
+    }
 }

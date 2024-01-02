@@ -15,7 +15,9 @@ import repository.mesto.*;
 import repository.posiljke.*;
 import repository.posta.*;
 import repository.dostavniSpisak.*;
+import repository.linija.AddLinija;
 import repository.linija.GetAllLinije;
+import repository.linija.UpdateLinija;
 import repository.otpremnica.AddOtpremnica;
 import repository.otpremnica.GetAllOtpremnice;
 import repository.otpremnica.UpdateOtpremnica;
@@ -105,6 +107,7 @@ public class Controller {
         if(object instanceof Otpremnica) addOtpremnica(object);
         if(object instanceof Upravlja) addUpravlja(object);
         if(object instanceof Vozac) addVozac(object);
+        if(object instanceof Linija) addLinija(object);
     }
     
     public void update(Object object) throws Exception{
@@ -115,6 +118,7 @@ public class Controller {
         if(object instanceof Otpremnica) updateOtpremnica(object);
         if(object instanceof Upravlja) updateUpravlja(object);
         if(object instanceof Vozac) updateVozac(object);
+        if(object instanceof Linija) updateLinija(object);
     }
     
     public void delete(Object object) throws Exception{
@@ -309,6 +313,11 @@ public class Controller {
         operation.execute(argument);
     }
     
+    private void addLinija(Object argument) throws Exception{
+        operation = new AddLinija();
+        operation.execute(argument);
+    }
+    
     private void addUpravlja(Object argument) throws Exception{
         operation = new AddUpravljanje();
         operation.execute(argument);
@@ -346,6 +355,11 @@ public class Controller {
     
     private void updateUpravlja(Object argument) throws Exception{
         operation = new UpdateUpravlja();
+        operation.execute(argument);
+    }
+    
+    private void updateLinija(Object argument) throws Exception{
+        operation = new UpdateLinija();
         operation.execute(argument);
     }
 

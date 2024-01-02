@@ -94,8 +94,10 @@ public class Linija implements GenericEntity{
     @Override
     public String getSelectValues() {
         StringBuilder sb = new StringBuilder();
-        sb.append("SELECT sifraLinije,naziv")
-          .append(" FROM ").append(getTableName());
+        sb.append("SELECT l.sifraLinije,l.naziv AS nazivLinije,l.redniBrojPoste, ")
+          .append("p.naziv AS nazivPoste")
+          .append(" FROM ").append(getTableName()).append(" l ")
+          .append("INNER JOIN VUK.posta p ON l.redniBrojPoste=p.redniBroj");
         return sb.toString();
     }
 
@@ -113,8 +115,12 @@ public class Linija implements GenericEntity{
     public GenericEntity getObject(ResultSet rs) {
         try {
             sifraLinije = rs.getInt("sifraLinije");
-            naziv = rs.getString("naziv");
-            return new Linija(sifraLinije, naziv);
+            naziv = rs.getString("nazivLinije");
+            Integer redniBrojPoste = rs.getInt("redniBrojPoste");
+            String nazivPoste = rs.getString("nazivPoste");
+            posta = new Posta(redniBrojPoste, nazivPoste);
+            
+            return new Linija(sifraLinije, naziv, posta);
         } catch (SQLException ex) {
             Logger.getLogger(Linija.class.getName()).log(Level.SEVERE, null, ex);
             return null;
@@ -133,22 +139,29 @@ public class Linija implements GenericEntity{
 
     @Override
     public String getColumnNamesForInsert() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "sifraLinije,naziv,redniBrojPoste";
     }
 
     @Override
     public String getInsertValues() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        StringBuilder sb = new StringBuilder();
+        sb.append(sifraLinije).append(",")
+          .append("'").append(naziv).append("',")
+          .append(posta.getRedniBroj());
+        return sb.toString();
     }
 
     @Override
     public String getUpdateSetValues() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        StringBuilder sb = new StringBuilder();
+        sb.append("naziv='").append(naziv).append("',")
+          .append("redniBrojPoste=").append(posta.getRedniBroj());
+        return sb.toString();
     }
 
     @Override
     public String getUpdateCondition() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "sifraLinije=" + sifraLinije;
     }
 
     @Override

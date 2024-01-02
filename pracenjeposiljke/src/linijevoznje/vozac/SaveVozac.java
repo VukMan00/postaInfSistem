@@ -173,6 +173,7 @@ public class SaveVozac extends javax.swing.JDialog {
             List<Posta> poste = Controller.getInstance().getPoste(new Posta());
             txtTrenutnaLinija.setVisible(false);
             lbTrenutnaLinija.setVisible(false);
+            txtSifraVozaca.setEditable(true);
             if(operation.equals("UPDATE")){
                 populateForm();
             }
