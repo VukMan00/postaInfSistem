@@ -108,6 +108,7 @@ public class Controller {
         if(object instanceof Upravlja) addUpravlja(object);
         if(object instanceof Vozac) addVozac(object);
         if(object instanceof Linija) addLinija(object);
+        if(object instanceof PopisPosiljakaUSVreci) addVreca(object);
     }
     
     public void update(Object object) throws Exception{
@@ -119,6 +120,7 @@ public class Controller {
         if(object instanceof Upravlja) updateUpravlja(object);
         if(object instanceof Vozac) updateVozac(object);
         if(object instanceof Linija) updateLinija(object);
+        if(object instanceof PopisPosiljakaUSVreci) updateVreca(object);
     }
     
     public void delete(Object object) throws Exception{
@@ -129,6 +131,7 @@ public class Controller {
         if(object instanceof Adresnica) deletePosiljka(object);
         if(object instanceof DostavniSpisak) deleteDostavniSpisak(object);
         if(object instanceof Upravlja) deleteUpravlja(object);
+        if(object instanceof PopisPosiljakaUSVreci) deleteVreca(object);
     }
 
     public GenericEntity login(UserLogin user) throws Exception{
@@ -323,6 +326,16 @@ public class Controller {
         operation.execute(argument);
     }
     
+    private void addVreca(Object argument) throws Exception{
+        operation = new AddVreca();
+        operation.execute(argument);
+    }
+    
+    private void updateVreca(Object argument) throws Exception{
+        operation = new UpdateVreca();
+        operation.execute(argument);
+    }
+    
     private void updateVozac(Object argument) throws Exception{
         operation = new UpdateVozac();
         operation.execute(argument);
@@ -398,5 +411,8 @@ public class Controller {
         operation.execute(argument);
     }
 
-    
+    private void deleteVreca(Object argument) throws Exception {
+        operation = new DeleteVreca();
+        operation.execute(argument);
+    }    
 }

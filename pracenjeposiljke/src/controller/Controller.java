@@ -147,7 +147,7 @@ public class Controller {
         }
     }
     
-    public List<SpisakRazmene> getSpisak(SpisakRazmene spisak) throws Exception{
+    public List<SpisakRazmene> getSpiskoviRazmene(SpisakRazmene spisak) throws Exception{
         try {
             request = new Request(Operation.GET_ALL, spisak);
             sender.send(request);
@@ -380,6 +380,12 @@ public class Controller {
         response = (Response) receiver.receive();
     }
     
+    public void addVreca(PopisPosiljakaUSVreci vreca) throws Exception{
+        request = new Request(Operation.ADD, vreca);
+        sender.send(request);
+        response = (Response) receiver.receive();
+    }
+    
     public void updateKorisnik(Korisnik korisnik) throws Exception {
         request = new Request(Operation.UPDATE, korisnik);
         sender.send(request);
@@ -428,6 +434,12 @@ public class Controller {
         response = (Response)receiver.receive();
     }
     
+    public void updateVreca(PopisPosiljakaUSVreci vreca) throws Exception{
+        request = new Request(Operation.UPDATE, vreca);
+        sender.send(request);
+        response = (Response) receiver.receive();
+    }
+    
     public void deleteMesto(Mesto mesto) throws Exception{
         request = new Request(Operation.DELETE, mesto);
         sender.send(request);
@@ -466,6 +478,12 @@ public class Controller {
     
     public void deleteUpravlja(Upravlja upravlja) throws Exception{
         request = new Request(Operation.DELETE, upravlja);
+        sender.send(request);
+        response = (Response) receiver.receive();
+    }
+    
+    public void deleteVreca(PopisPosiljakaUSVreci vreca) throws Exception{
+        request = new Request(Operation.DELETE, vreca);
         sender.send(request);
         response = (Response) receiver.receive();
     }

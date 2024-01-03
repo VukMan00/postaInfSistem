@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -176,27 +177,47 @@ public class PopisPosiljakaUSVreci implements GenericEntity{
 
     @Override
     public String getColumnNamesForInsert() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "oznakaVrece,oznakaSpiska,datumStampe,vremeStampe,redniBrojPostePrimaoca,redniBrojPostePosiljaoca,masaVrece";
     }
 
     @Override
     public String getInsertValues() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String datumStampeFormmated = formatDatumStampe();
+        String vremeStampeFormmated = formatVremeStampe();
+        StringBuilder sb = new StringBuilder();
+        sb.append(oznakaVrece).append(",")
+          .append(spisak.getOznakaSpiska()).append(",")
+          .append("TO_DATE(").append("'").append(datumStampeFormmated).append("','DD-MM-YYYY'),")
+          .append("TO_TIMESTAMP(").append("'").append(vremeStampeFormmated).append("','DD-MM-YYYY HH24:MI:SS'),")
+          .append(postaPrimalac.getRedniBroj()).append(",")
+          .append(postaPosiljalac.getRedniBroj()).append(",")
+          .append(masaVrece);
+        return sb.toString();
     }
 
     @Override
     public String getUpdateSetValues() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String datumStampeFormmated = formatDatumStampe();
+        String vremeStampeFormmated = formatVremeStampe();
+        StringBuilder sb = new StringBuilder();
+        sb.append("oznakaVrece=").append(oznakaVrece).append(",")
+          .append("oznakaSpiska=").append(spisak.getOznakaSpiska()).append(",")
+          .append("datumStampe=").append("TO_DATE(").append("'").append(datumStampeFormmated).append("','DD-MM-YYYY'),")
+          .append("vremeStampe=").append("TO_TIMESTAMP(").append("'").append(vremeStampeFormmated).append("','DD-MM-YYYY HH24:MI:SS'),")
+          .append("redniBrojPostePrimaoca=").append(postaPrimalac.getRedniBroj()).append(",")
+          .append("redniBrojPostePosiljaoca=").append(postaPosiljalac.getRedniBroj()).append(",")
+          .append("masaVrece=").append(masaVrece);
+        return sb.toString();
     }
 
     @Override
     public String getUpdateCondition() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "oznakaVrece=" + oznakaVrece;
     }
 
     @Override
     public String getDeleteCondition() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "oznakaVrece=" + oznakaVrece;
     }
 
     @Override
@@ -224,5 +245,15 @@ public class PopisPosiljakaUSVreci implements GenericEntity{
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
-    
+    private String formatDatumStampe() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String formattedDatumStampe = dtf.format(datumStampe);
+        return formattedDatumStampe;
+    }
+
+    private String formatVremeStampe() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formattedVremeStampe = dtf.format(vremeStampe);
+        return formattedVremeStampe;
+    }
 }

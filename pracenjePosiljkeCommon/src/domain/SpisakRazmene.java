@@ -125,10 +125,6 @@ public class SpisakRazmene implements GenericEntity{
         return Objects.equals(this.oznakaSpiska, other.oznakaSpiska);
     }
     
-    
-    
-    
-
     @Override
     public String getSelectValues() {
         StringBuilder sb = new StringBuilder();

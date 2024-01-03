@@ -12,6 +12,7 @@ import linijevoznje.OptionsVozac;
 import login.RadnikLogin;
 import posiljke.OptionsPosiljke;
 import session.LocalStorage;
+import vreca.OptionsVreca;
 
 /**
  *
@@ -58,6 +59,8 @@ public class ObracunskiRadnik extends javax.swing.JDialog {
         miOperationPosiljke = new javax.swing.JMenuItem();
         mnDostavniSpisak = new javax.swing.JMenu();
         miDostavniSpisakOpeation = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        miVreceOperations = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         miVozac = new javax.swing.JMenuItem();
         miLinija = new javax.swing.JMenuItem();
@@ -137,6 +140,18 @@ public class ObracunskiRadnik extends javax.swing.JDialog {
         mnDostavniSpisak.add(miDostavniSpisakOpeation);
 
         jMenuBar1.add(mnDostavniSpisak);
+
+        jMenu5.setText("Vreće");
+
+        miVreceOperations.setText("Operacije");
+        miVreceOperations.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miVreceOperationsActionPerformed(evt);
+            }
+        });
+        jMenu5.add(miVreceOperations);
+
+        jMenuBar1.add(jMenu5);
 
         jMenu4.setText(" Upravljanje linijom");
 
@@ -250,6 +265,13 @@ public class ObracunskiRadnik extends javax.swing.JDialog {
         ol.setVisible(true);
     }//GEN-LAST:event_miLinijaActionPerformed
 
+    private void miVreceOperationsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miVreceOperationsActionPerformed
+        // TODO add your handling code here:
+        OptionsVreca ov = new OptionsVreca(null, true);
+        ov.setLocationRelativeTo(null);
+        ov.setVisible(true);
+    }//GEN-LAST:event_miVreceOperationsActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -263,6 +285,7 @@ public class ObracunskiRadnik extends javax.swing.JDialog {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JLabel lbImePrezime;
@@ -274,6 +297,7 @@ public class ObracunskiRadnik extends javax.swing.JDialog {
     private javax.swing.JMenuItem miOperationKorisnik;
     private javax.swing.JMenuItem miOperationPosiljke;
     private javax.swing.JMenuItem miVozac;
+    private javax.swing.JMenuItem miVreceOperations;
     private javax.swing.JMenu mnDostavniSpisak;
     // End of variables declaration//GEN-END:variables
 

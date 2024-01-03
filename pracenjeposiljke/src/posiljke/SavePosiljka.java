@@ -356,7 +356,7 @@ public class SavePosiljka extends javax.swing.JDialog {
     private void setComponents() {
         try {
             vrece = Controller.getInstance().getVrece(new PopisPosiljakaUSVreci());
-            spiskovi = Controller.getInstance().getSpisak(new SpisakRazmene());
+            spiskovi = Controller.getInstance().getSpiskoviRazmene(new SpisakRazmene());
             korisnici = Controller.getInstance().getKorisnici(new Korisnik());
             
             cbVreca.setModel(new DefaultComboBoxModel(vrece.toArray()));
