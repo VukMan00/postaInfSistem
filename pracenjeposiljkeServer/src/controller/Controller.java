@@ -61,6 +61,7 @@ public class Controller {
     public Object get(Object object) throws Exception{
         if(object instanceof Adresnica) return getAdresnica(object);
         if(object instanceof Uplata) return getUplata(object);
+        if(object instanceof PopisPosiljakaUSVreci) return getVreca(object);
         return null;
     }
     
@@ -253,6 +254,12 @@ public class Controller {
         operation = new GetUplata();
         operation.execute(argument);
         return ((GetUplata)operation).getUplata();
+    }
+    
+    private Object getVreca(Object argument) throws Exception {
+         operation = new GetVreca();
+         operation.execute(argument);
+         return ((GetVreca)operation).getVreca();
     }
     
     private Object getLinije(Object argument) throws Exception {

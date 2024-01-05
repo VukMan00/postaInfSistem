@@ -103,6 +103,17 @@ public class Controller {
         }
     }
     
+    public PopisPosiljakaUSVreci getVreca(PopisPosiljakaUSVreci vreca) throws Exception{
+        try {
+            request = new Request(Operation.GET, vreca);
+            sender.send(request);
+            response = (Response) receiver.receive();
+            return (PopisPosiljakaUSVreci)response.getResult();
+        } catch (Exception ex) {
+            throw response.getException();
+        }
+    }
+    
     public List<DostavljanjePosiljke> getPrimljenePosiljke(DostavljanjePosiljke dp) throws Exception{
         try {
             request = new Request(Operation.GET_ALL, dp);

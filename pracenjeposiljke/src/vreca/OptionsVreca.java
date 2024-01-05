@@ -5,6 +5,7 @@
 package vreca;
 
 import controller.Controller;
+import domain.Adresnica;
 import domain.DostavniSpisak;
 import domain.PopisPosiljakaUSVreci;
 import java.awt.event.KeyEvent;
@@ -106,6 +107,11 @@ public class OptionsVreca extends javax.swing.JDialog {
 
         btnViewVreca.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         btnViewVreca.setText("Pregled vreće");
+        btnViewVreca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewVrecaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -212,6 +218,19 @@ public class OptionsVreca extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_btnDeleteVrecaActionPerformed
+
+    private void btnViewVrecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewVrecaActionPerformed
+        // TODO add your handling code here:
+        PopisPosiljakaUSVreci vreca = getSelectedVreca();
+        if(vreca!=null){
+            localStorage.addItemsInHashMap("vreca", vreca);
+            PregledVrece pv = new PregledVrece(null, true);
+            pv.setLocationRelativeTo(null);
+            pv.setVisible(true);
+            localStorage.removeItemFromHashMap("vreca");
+            populateTable();
+        }
+    }//GEN-LAST:event_btnViewVrecaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

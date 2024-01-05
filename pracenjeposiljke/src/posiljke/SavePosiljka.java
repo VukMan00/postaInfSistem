@@ -286,7 +286,7 @@ public class SavePosiljka extends javax.swing.JDialog {
         adresnica = getInputDataAdresnica();
         
         if(!primalac.equals(posiljalac)){
-            if(operation.equals("CREATE")){
+            if(operation.equals("CREATE") || operation.contains("CREATE-VRECA")){
                 try {
                     Controller.getInstance().addPosiljka(adresnica);
                     JOptionPane.showMessageDialog(this, "Upesno kreirana adresnica");
@@ -294,7 +294,7 @@ public class SavePosiljka extends javax.swing.JDialog {
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);
                 }
-            }else if(operation.equals("UPDATE")){
+            }else if(operation.equals("UPDATE") || operation.contains("UPDATE-VRECA")){
                 try {
                     Controller.getInstance().updatePosiljka(adresnica);
                     JOptionPane.showMessageDialog(this, "Upesno ažurirana adresnica");
@@ -359,6 +359,8 @@ public class SavePosiljka extends javax.swing.JDialog {
             spiskovi = Controller.getInstance().getSpiskoviRazmene(new SpisakRazmene());
             korisnici = Controller.getInstance().getKorisnici(new Korisnik());
             
+            cbVreca.setEnabled(true);
+            cbSpisak.setEnabled(true);
             cbVreca.setModel(new DefaultComboBoxModel(vrece.toArray()));
             cbSpisak.setModel(new DefaultComboBoxModel(spiskovi.toArray()));
             cbPrimalac.setModel(new DefaultComboBoxModel(korisnici.toArray()));
@@ -367,8 +369,10 @@ public class SavePosiljka extends javax.swing.JDialog {
             PopisPosiljakaUSVreci vr = (PopisPosiljakaUSVreci) cbVreca.getSelectedItem();
             cbSpisak.setSelectedItem(vr.getSpisak());
             
-            if(operation.contains("UPDATE")){
+            if(operation.equals("UPDATE") || operation.equals("UPDATE-VRECA")){
                 populateForm();
+            }else if(operation.equals("CREATE-VRECA")){
+                populateFormFromVreca();
             }
             
         } catch (Exception ex) {
@@ -388,6 +392,15 @@ public class SavePosiljka extends javax.swing.JDialog {
         cbPrimalac.setSelectedItem(adresnica.getPrimalac());
         cbVreca.setSelectedItem(adresnica.getVreca());
         cbSpisak.setSelectedItem(adresnica.getSpisak());
+        
+        if(operation.equals("UPDATE-VRECA")){
+            cbVreca.setEnabled(false);
+            cbSpisak.setEnabled(false);
+        }
+        else{
+            cbVreca.setEnabled(true);
+            cbSpisak.setEnabled(true);
+        }
     }
 
     private Korisnik getInputDataPrimalac() {
@@ -412,5 +425,13 @@ public class SavePosiljka extends javax.swing.JDialog {
         String sadrzina = txtSadrzina.getText();
         Integer masa = Integer.parseInt(txtMasa.getText());
         return new Adresnica(sifraAdresnice, vreca, spisak, posiljalac, primalac, masa, napomena, sadrzina);
+    }
+
+    private void populateFormFromVreca() {
+        vreca = (PopisPosiljakaUSVreci) localStorage.getItemFromHashMap("vreca");
+        cbVreca.setSelectedItem(vreca);
+        cbVreca.setEnabled(false);
+        cbSpisak.setSelectedItem(vreca.getSpisak());
+        cbSpisak.setEnabled(false);
     }
 }

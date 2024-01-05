@@ -159,6 +159,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Pregled vre&#x107;e"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnViewVrecaActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

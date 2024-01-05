@@ -222,7 +222,7 @@ public class PopisPosiljakaUSVreci implements GenericEntity{
 
     @Override
     public String getWhereGetCondition() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "oznakaVrece=" + oznakaVrece;
     }
 
     @Override
