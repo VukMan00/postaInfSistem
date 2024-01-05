@@ -137,22 +137,18 @@ public class SaveVozac extends javax.swing.JDialog {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
         vozac = getInputData();
-        if(operation.equals("CREATE")){
-            try {
+        try{
+            if(operation.equals("CREATE")){
                 Controller.getInstance().addVozac(vozac);
                 JOptionPane.showMessageDialog(this, "Upesno kreiran vozač");
                 this.dispose();
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);
-            }
-        }else if(operation.equals("UPDATE")){
-            try {
+            }else if(operation.equals("UPDATE")){
                 Controller.getInstance().updateVozac(vozac);
                 JOptionPane.showMessageDialog(this, "Upesno ažuriran vozač");
                 this.dispose();
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);
             }
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 

@@ -221,26 +221,22 @@ public class SaveVreca extends javax.swing.JDialog {
          vreca = getInputData();
          Posta primalac = vreca.getPostaPrimalac();
          Posta posiljalac = vreca.getPostaPosiljalac();
-         if(!primalac.equals(posiljalac)){
-            if(operation.equals("CREATE")){
-                try {
-                   Controller.getInstance().addVreca(vreca);
-                   JOptionPane.showMessageDialog(this, "Upesno kreirana vreća");
-                   this.dispose();
-                } catch (Exception ex) {
-                   JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);
-                }
-            }else if(operation.endsWith("UPDATE")){
-                try {
-                   Controller.getInstance().updateVreca(vreca);
-                   JOptionPane.showMessageDialog(this, "Upesno ažurirana vreća");
-                   this.dispose();
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);
-                }
+         try{
+            if(!primalac.equals(posiljalac)){
+               if(operation.equals("CREATE")){
+                    Controller.getInstance().addVreca(vreca);
+                    JOptionPane.showMessageDialog(this, "Upesno kreirana vreća");
+                    this.dispose();
+               }else if(operation.endsWith("UPDATE")){
+                    Controller.getInstance().updateVreca(vreca);
+                    JOptionPane.showMessageDialog(this, "Upesno ažurirana vreća");
+                    this.dispose();
+               }
+            }else{
+                JOptionPane.showMessageDialog(this, "Vreca ne može biti kreirana i isporučena u istoj Pošti!!!");
             }
-         }else{
-             JOptionPane.showMessageDialog(this, "Vreca ne može biti kreirana i isporučena u istoj Pošti!!!");
+         }catch(Exception ex){
+             JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);
          }
                  
     }//GEN-LAST:event_btnSaveActionPerformed

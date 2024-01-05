@@ -137,22 +137,18 @@ public class SaveLinija extends javax.swing.JDialog {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
         linija = getInputData();
-        if(operation.equals("CREATE")){
-            try {
+        try{
+            if(operation.equals("CREATE")){
                 Controller.getInstance().addLinija(linija);
                 JOptionPane.showMessageDialog(this, "Upesno kreirana linija");
                 this.dispose();
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);
-            }
-        }else if(operation.equals("UPDATE")){
-            try {
+            }else if(operation.equals("UPDATE")){
                 Controller.getInstance().updateLinija(linija);
                 JOptionPane.showMessageDialog(this, "Upesno ažurirana linija");
                 this.dispose();
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);
             }
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 

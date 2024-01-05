@@ -285,24 +285,20 @@ public class SavePosiljka extends javax.swing.JDialog {
         spisak = getInputDataSpisak();
         adresnica = getInputDataAdresnica();
         
-        if(!primalac.equals(posiljalac)){
-            if(operation.equals("CREATE") || operation.contains("CREATE-VRECA")){
-                try {
+        try{
+            if(!primalac.equals(posiljalac)){
+                if(operation.equals("CREATE") || operation.contains("CREATE-VRECA")){
                     Controller.getInstance().addPosiljka(adresnica);
                     JOptionPane.showMessageDialog(this, "Upesno kreirana adresnica");
                     this.dispose();
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);
-                }
-            }else if(operation.equals("UPDATE") || operation.contains("UPDATE-VRECA")){
-                try {
+                }else if(operation.equals("UPDATE") || operation.contains("UPDATE-VRECA")){
                     Controller.getInstance().updatePosiljka(adresnica);
                     JOptionPane.showMessageDialog(this, "Upesno ažurirana adresnica");
                     this.dispose();
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);
                 }
             }
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);
         }
     }//GEN-LAST:event_btnSavePosiljkaActionPerformed
 
@@ -360,7 +356,6 @@ public class SavePosiljka extends javax.swing.JDialog {
             korisnici = Controller.getInstance().getKorisnici(new Korisnik());
             
             cbVreca.setEnabled(true);
-            cbSpisak.setEnabled(true);
             cbVreca.setModel(new DefaultComboBoxModel(vrece.toArray()));
             cbSpisak.setModel(new DefaultComboBoxModel(spiskovi.toArray()));
             cbPrimalac.setModel(new DefaultComboBoxModel(korisnici.toArray()));
@@ -395,11 +390,9 @@ public class SavePosiljka extends javax.swing.JDialog {
         
         if(operation.equals("UPDATE-VRECA")){
             cbVreca.setEnabled(false);
-            cbSpisak.setEnabled(false);
         }
         else{
             cbVreca.setEnabled(true);
-            cbSpisak.setEnabled(true);
         }
     }
 

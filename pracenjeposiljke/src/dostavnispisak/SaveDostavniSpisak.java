@@ -313,22 +313,18 @@ public class SaveDostavniSpisak extends javax.swing.JDialog {
         postar = getInputDataPostar();
         obracunskiRadnik = getInputDataObracunskiRadnik();
         dostavniSpisak = getInputDostavniSpisak();
-        if(operation.equals("CREATE")){
-            try {
+        try{
+            if(operation.equals("CREATE")){
                 Controller.getInstance().addDostavniSpisak(dostavniSpisak);
                 JOptionPane.showMessageDialog(this, "Upesno kreiran dostavni spisak");
                 this.dispose();
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);
-            }
-        }else if(operation.equals("UPDATE")){
-            try {
+            }else if(operation.equals("UPDATE")){
                 Controller.getInstance().updateDostavniSpisak(dostavniSpisak);
                 JOptionPane.showMessageDialog(this, "Upesno ažuriran dostavni spisak");
                 this.dispose();
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);
             }
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 

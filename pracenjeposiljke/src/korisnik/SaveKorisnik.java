@@ -9,7 +9,6 @@ import domain.Adresa;
 import domain.BrojUlice;
 import domain.Korisnik;
 import domain.Mesto;
-import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -242,30 +241,26 @@ public class SaveKorisnik extends javax.swing.JDialog {
         adresa = getInputDataAdresa();
         brojUlice = getInputDataBrojUlice();
         korisnik = getInputDataKorisnik();
-        if(operation.equals("CREATE")){
-            try{
-                Controller.getInstance().addKorisnik(korisnik);
-                JOptionPane.showMessageDialog(this, "Upesno kreiran korisnik");
-                this.dispose();
-            } catch (Exception ex) {
-                try {
+        try{
+            if(operation.equals("CREATE")){
+                try{
+                    Controller.getInstance().addKorisnik(korisnik);
+                    JOptionPane.showMessageDialog(this, "Upesno kreiran korisnik");
+                    this.dispose();
+                } catch (Exception  ex) {
+                    System.out.println(ex.getMessage());
                     Controller.getInstance().deleteBrojUlice(brojUlice);
                     Controller.getInstance().deleteAdresa(adresa);
                     JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);
-                } catch (Exception ex1) {
-                    JOptionPane.showMessageDialog(null, ex1.getMessage(), "Exception1", JOptionPane.PLAIN_MESSAGE);
                 }
-            }
-        }else if(operation.equals("UPDATE")){
-            try {
+            }else if(operation.equals("UPDATE")){
                 Controller.getInstance().updateKorisnik(korisnik);
                 JOptionPane.showMessageDialog(this, "Upesno ažuriran korisnik");
                 this.dispose();
-            } catch (Exception ex) {
-                Logger.getLogger(SaveKorisnik.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);
         }
-        this.dispose();
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed

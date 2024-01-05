@@ -5,6 +5,7 @@
 package repository;
 
 import domain.GenericEntity;
+import exception.MyException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -62,6 +63,8 @@ public class RepositoryImpl implements DbRepository<GenericEntity>{
                 System.out.println(entity);
                 statement.executeUpdate();
             }
+        } catch (SQLException ex) {
+            throw ex;
         } catch (Exception ex) {
             throw ex;
         }
@@ -81,6 +84,8 @@ public class RepositoryImpl implements DbRepository<GenericEntity>{
             try(Statement statement = connection.createStatement()){
                 statement.executeUpdate(query);
             }
+        } catch (SQLException ex) {
+            throw ex;
         } catch (Exception ex) {
             throw ex;
         }
@@ -103,7 +108,9 @@ public class RepositoryImpl implements DbRepository<GenericEntity>{
                 System.out.println(entity);
                 statement.executeUpdate();
             }
-        }catch(Exception ex){
+        } catch (SQLException ex) {
+            throw ex;
+        } catch (Exception ex) {
             throw ex;
         }
     }
@@ -121,6 +128,8 @@ public class RepositoryImpl implements DbRepository<GenericEntity>{
             try(Statement statement = connection.createStatement()){
                 statement.executeUpdate(query);
             }
+        } catch (SQLException ex) {
+            throw ex;
         } catch (Exception ex) {
             throw ex;
         }
@@ -141,6 +150,8 @@ public class RepositoryImpl implements DbRepository<GenericEntity>{
                     return entity.getObject(rs);
                 }
             }
+        } catch (SQLException ex) {
+            throw ex;
         } catch (Exception ex) {
             throw ex;
         }
@@ -167,6 +178,8 @@ public class RepositoryImpl implements DbRepository<GenericEntity>{
             }
             
             return entities;
+        } catch (SQLException ex) {
+            throw ex;
         } catch (Exception ex) {
             throw ex;
         }
@@ -191,6 +204,8 @@ public class RepositoryImpl implements DbRepository<GenericEntity>{
             }
             
             return entities;
+        } catch (SQLException ex) {
+            throw ex;
         } catch (Exception ex) {
             throw ex;
         }
@@ -215,6 +230,8 @@ public class RepositoryImpl implements DbRepository<GenericEntity>{
             }
             
             return entities;
+        } catch (SQLException ex) {
+            throw ex;
         } catch (Exception ex) {
             throw ex;
         }
@@ -235,6 +252,8 @@ public class RepositoryImpl implements DbRepository<GenericEntity>{
                     return genericEntity.getObject(rs);
                 }
             }
+        } catch (SQLException ex) {
+            throw ex;
         } catch (Exception ex) {
             throw ex;
         }

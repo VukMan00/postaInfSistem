@@ -208,22 +208,18 @@ public class SavePotvrdaPosiljke extends javax.swing.JDialog {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
         potvrda = getInputDataPotvrda();
-        if(operation.equals("CREATE")){
-            try {
+        try{
+            if(operation.equals("CREATE")){
                 Controller.getInstance().addPotvrdaOPrijemuPosiljke(potvrda);
                 JOptionPane.showMessageDialog(this, "Upesno kreirana potvrda o prijemu pošiljke");
                 this.dispose();
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);
-            }
-        }else if(operation.equals("UPDATE")){
-            try {
+            }else if(operation.equals("UPDATE")){
                 Controller.getInstance().updatePotvrdaPosiljke(potvrda);
                 JOptionPane.showMessageDialog(this, "Upesno ažurirana potvrda o prijemu pošiljke");
                 this.dispose();
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);
             }
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
