@@ -222,15 +222,24 @@ public class SaveVreca extends javax.swing.JDialog {
          Posta primalac = vreca.getPostaPrimalac();
          Posta posiljalac = vreca.getPostaPosiljalac();
          try{
+             String messageException;
             if(!primalac.equals(posiljalac)){
                if(operation.equals("CREATE")){
-                    Controller.getInstance().addVreca(vreca);
-                    JOptionPane.showMessageDialog(this, "Upesno kreirana vreća");
-                    this.dispose();
+                    messageException = Controller.getInstance().addVreca(vreca);
+                    if(messageException==null){
+                        JOptionPane.showMessageDialog(this, "Upesno kreirana vreća");
+                        this.dispose();
+                    }else{
+                        JOptionPane.showMessageDialog(null, messageException, "Exception", JOptionPane.PLAIN_MESSAGE);
+                    }
                }else if(operation.endsWith("UPDATE")){
-                    Controller.getInstance().updateVreca(vreca);
-                    JOptionPane.showMessageDialog(this, "Upesno ažurirana vreća");
-                    this.dispose();
+                    messageException = Controller.getInstance().updateVreca(vreca);
+                    if(messageException==null){
+                        JOptionPane.showMessageDialog(this, "Upesno ažurirana vreća");
+                        this.dispose();
+                    }else{
+                        JOptionPane.showMessageDialog(null, messageException, "Exception", JOptionPane.PLAIN_MESSAGE);
+                    }
                }
             }else{
                 JOptionPane.showMessageDialog(this, "Vreca ne može biti kreirana i isporučena u istoj Pošti!!!");

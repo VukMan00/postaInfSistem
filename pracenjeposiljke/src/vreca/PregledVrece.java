@@ -220,11 +220,16 @@ public class PregledVrece extends javax.swing.JDialog {
         // TODO add your handling code here:
         Adresnica posiljka = getSelectedPosiljka();
         if(posiljka!=null){
+            String messageException;
             try {
-                Controller.getInstance().deletePosiljka(posiljka);
-                JOptionPane.showMessageDialog(this, "Upesno izbrisana adresnica");
+                messageException = Controller.getInstance().deletePosiljka(posiljka);
+                if(messageException==null){
+                    JOptionPane.showMessageDialog(this, "Upesno izbrisana adresnica");
+                }else{
+                    JOptionPane.showMessageDialog(null, messageException, "Exception", JOptionPane.PLAIN_MESSAGE);
+                }
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Posiljka je u relaciji sa drugim tabelama", "Exception", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null,ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);
             }
         }
     }//GEN-LAST:event_btnDeletePosiljkaActionPerformed

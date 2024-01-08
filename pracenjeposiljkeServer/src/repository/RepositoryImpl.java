@@ -5,7 +5,6 @@
 package repository;
 
 import domain.GenericEntity;
-import exception.MyException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -37,8 +36,10 @@ public class RepositoryImpl implements DbRepository<GenericEntity>{
                 statement.executeUpdate(query);
             }
         } catch (SQLException ex) {
-            throw ex;
+            System.out.println(ex.getMessage());
+            throw new Exception(ex.getMessage());
         } catch (Exception ex) {
+            System.out.println(ex.getMessage());
             throw ex;
         }
     }
@@ -64,8 +65,10 @@ public class RepositoryImpl implements DbRepository<GenericEntity>{
                 statement.executeUpdate();
             }
         } catch (SQLException ex) {
-            throw ex;
+            System.out.println(ex.getMessage());
+            throw new Exception(ex.getMessage());
         } catch (Exception ex) {
+            System.out.println(ex.getMessage());
             throw ex;
         }
     }
@@ -85,8 +88,10 @@ public class RepositoryImpl implements DbRepository<GenericEntity>{
                 statement.executeUpdate(query);
             }
         } catch (SQLException ex) {
-            throw ex;
+            System.out.println(ex.getMessage());
+            throw new Exception(ex.getMessage());
         } catch (Exception ex) {
+            System.out.println(ex.getMessage());
             throw ex;
         }
     }
@@ -109,8 +114,10 @@ public class RepositoryImpl implements DbRepository<GenericEntity>{
                 statement.executeUpdate();
             }
         } catch (SQLException ex) {
-            throw ex;
+            System.out.println(ex.getMessage());
+            throw new Exception(ex.getMessage());
         } catch (Exception ex) {
+            System.out.println(ex.getMessage());
             throw ex;
         }
     }
@@ -129,8 +136,10 @@ public class RepositoryImpl implements DbRepository<GenericEntity>{
                 statement.executeUpdate(query);
             }
         } catch (SQLException ex) {
-            throw ex;
+            System.out.println(ex.getMessage());
+            throw new Exception(ex.getMessage());
         } catch (Exception ex) {
+            System.out.println(ex.getMessage());
             throw ex;
         }
     }
@@ -151,8 +160,10 @@ public class RepositoryImpl implements DbRepository<GenericEntity>{
                 }
             }
         } catch (SQLException ex) {
-            throw ex;
+            System.out.println(ex.getMessage());
+            throw new Exception(ex.getMessage());
         } catch (Exception ex) {
+            System.out.println(ex.getMessage());
             throw ex;
         }
         
@@ -179,8 +190,10 @@ public class RepositoryImpl implements DbRepository<GenericEntity>{
             
             return entities;
         } catch (SQLException ex) {
-            throw ex;
+            System.out.println(ex.getMessage());
+            throw new Exception(ex.getMessage());
         } catch (Exception ex) {
+            System.out.println(ex.getMessage());
             throw ex;
         }
     }
@@ -205,8 +218,10 @@ public class RepositoryImpl implements DbRepository<GenericEntity>{
             
             return entities;
         } catch (SQLException ex) {
-            throw ex;
+            System.out.println(ex.getMessage());
+            throw new Exception(ex.getMessage());
         } catch (Exception ex) {
+            System.out.println(ex.getMessage());
             throw ex;
         }
     }
@@ -231,8 +246,10 @@ public class RepositoryImpl implements DbRepository<GenericEntity>{
             
             return entities;
         } catch (SQLException ex) {
-            throw ex;
+            System.out.println(ex.getMessage());
+            throw new Exception(ex.getMessage());
         } catch (Exception ex) {
+            System.out.println(ex.getMessage());
             throw ex;
         }
     }
@@ -253,8 +270,10 @@ public class RepositoryImpl implements DbRepository<GenericEntity>{
                 }
             }
         } catch (SQLException ex) {
-            throw ex;
+            System.out.println(ex.getMessage());
+            throw new Exception(ex.getMessage());
         } catch (Exception ex) {
+            System.out.println(ex.getMessage());
             throw ex;
         }
         return null;

@@ -286,15 +286,25 @@ public class SavePosiljka extends javax.swing.JDialog {
         adresnica = getInputDataAdresnica();
         
         try{
+            String messageException;
             if(!primalac.equals(posiljalac)){
                 if(operation.equals("CREATE") || operation.contains("CREATE-VRECA")){
-                    Controller.getInstance().addPosiljka(adresnica);
-                    JOptionPane.showMessageDialog(this, "Upesno kreirana adresnica");
-                    this.dispose();
+                    messageException = Controller.getInstance().addPosiljka(adresnica);
+                    if(messageException==null){
+                        JOptionPane.showMessageDialog(this, "Upesno kreirana adresnica");
+                        this.dispose();
+                    }else{
+                        JOptionPane.showMessageDialog(null, messageException, "Exception", JOptionPane.PLAIN_MESSAGE);
+                    }
                 }else if(operation.equals("UPDATE") || operation.contains("UPDATE-VRECA")){
-                    Controller.getInstance().updatePosiljka(adresnica);
-                    JOptionPane.showMessageDialog(this, "Upesno ažurirana adresnica");
-                    this.dispose();
+                    messageException = Controller.getInstance().updatePosiljka(adresnica);
+                    if(messageException==null){
+                        JOptionPane.showMessageDialog(this, "Upesno ažurirana adresnica");
+                        this.dispose();
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, messageException, "Exception", JOptionPane.PLAIN_MESSAGE);
+                    }
                 }
             }
         }catch(Exception ex){

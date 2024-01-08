@@ -138,14 +138,23 @@ public class SaveLinija extends javax.swing.JDialog {
         // TODO add your handling code here:
         linija = getInputData();
         try{
+            String messageException;
             if(operation.equals("CREATE")){
-                Controller.getInstance().addLinija(linija);
-                JOptionPane.showMessageDialog(this, "Upesno kreirana linija");
-                this.dispose();
+                messageException = Controller.getInstance().addLinija(linija);
+                if(messageException==null){
+                    JOptionPane.showMessageDialog(this, "Upesno kreirana linija");
+                    this.dispose();
+                }else{
+                    JOptionPane.showMessageDialog(null, messageException, "Exception", JOptionPane.PLAIN_MESSAGE);
+                }
             }else if(operation.equals("UPDATE")){
-                Controller.getInstance().updateLinija(linija);
-                JOptionPane.showMessageDialog(this, "Upesno ažurirana linija");
-                this.dispose();
+                messageException = Controller.getInstance().updateLinija(linija);
+                if(messageException==null){
+                    JOptionPane.showMessageDialog(this, "Upesno ažurirana linija");
+                    this.dispose();
+                }else{
+                    JOptionPane.showMessageDialog(null, messageException, "Exception", JOptionPane.PLAIN_MESSAGE);
+                }
             }
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);

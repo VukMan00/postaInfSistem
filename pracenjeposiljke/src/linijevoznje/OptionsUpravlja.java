@@ -184,10 +184,15 @@ public class OptionsUpravlja extends javax.swing.JDialog {
         // TODO add your handling code here:
         Upravlja upravlja = getSelectedUpravlja();
         if(upravlja!=null){
+            String messageException;
             try {
-                Controller.getInstance().deleteUpravlja(upravlja);
-                JOptionPane.showMessageDialog(this, "Upesno ste izbrisali liniju vozaču");
-                populateTable();
+                messageException = Controller.getInstance().deleteUpravlja(upravlja);
+                if(messageException==null){
+                    JOptionPane.showMessageDialog(this, "Upesno ste izbrisali liniju vozaču");
+                    populateTable();
+                }else{
+                    JOptionPane.showMessageDialog(null, messageException, "Exception", JOptionPane.PLAIN_MESSAGE);
+                }
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);
             }

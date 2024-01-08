@@ -138,14 +138,23 @@ public class SaveVozac extends javax.swing.JDialog {
         // TODO add your handling code here:
         vozac = getInputData();
         try{
+            String messageException;
             if(operation.equals("CREATE")){
-                Controller.getInstance().addVozac(vozac);
-                JOptionPane.showMessageDialog(this, "Upesno kreiran vozač");
-                this.dispose();
+                messageException = Controller.getInstance().addVozac(vozac);
+                if(messageException==null){
+                    JOptionPane.showMessageDialog(this, "Upesno kreiran vozač");
+                    this.dispose();
+                }else{
+                    JOptionPane.showMessageDialog(null, messageException, "Exception", JOptionPane.PLAIN_MESSAGE);
+                }
             }else if(operation.equals("UPDATE")){
-                Controller.getInstance().updateVozac(vozac);
-                JOptionPane.showMessageDialog(this, "Upesno ažuriran vozač");
-                this.dispose();
+                messageException = Controller.getInstance().updateVozac(vozac);
+                if(messageException==null){
+                    JOptionPane.showMessageDialog(this, "Upesno ažuriran vozač");
+                    this.dispose();
+                }else{
+                    JOptionPane.showMessageDialog(null, messageException, "Exception", JOptionPane.PLAIN_MESSAGE);
+                }
             }
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);

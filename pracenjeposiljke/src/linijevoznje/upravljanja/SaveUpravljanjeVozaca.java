@@ -168,16 +168,25 @@ public class SaveUpravljanjeVozaca extends javax.swing.JDialog {
         // TODO add your handling code here:
         upravlja = getInputDataUpravlja();
         try{
+            String messageException;
             if(operation.contains("CREATE")){
-                Controller.getInstance().addUpravlja(upravlja);
-                JOptionPane.showMessageDialog(this, "Upesno ste dodali liniju vozaču");
-                this.dispose();
+                messageException = Controller.getInstance().addUpravlja(upravlja);
+                if(messageException==null){
+                    JOptionPane.showMessageDialog(this, "Upesno ste dodali liniju vozaču");
+                    this.dispose();
+                }else{
+                    JOptionPane.showMessageDialog(null, messageException, "Exception", JOptionPane.PLAIN_MESSAGE);
+                }
             }
             else{
                 if(operation.equals("UPDATE")){
-                    Controller.getInstance().updateUpravlja(upravlja);
-                    JOptionPane.showMessageDialog(this, "Upesno ste ažurirali liniju vozača");
-                    this.dispose();
+                    messageException = Controller.getInstance().updateUpravlja(upravlja);
+                    if(messageException==null){
+                        JOptionPane.showMessageDialog(this, "Upesno ste ažurirali liniju vozaču");
+                        this.dispose();
+                    }else{
+                        JOptionPane.showMessageDialog(null, messageException, "Exception", JOptionPane.PLAIN_MESSAGE);
+                    }
                 }
             }
         }catch(Exception ex){

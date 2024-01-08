@@ -209,14 +209,23 @@ public class SavePotvrdaPosiljke extends javax.swing.JDialog {
         // TODO add your handling code here:
         potvrda = getInputDataPotvrda();
         try{
+            String messageException;
             if(operation.equals("CREATE")){
-                Controller.getInstance().addPotvrdaOPrijemuPosiljke(potvrda);
-                JOptionPane.showMessageDialog(this, "Upesno kreirana potvrda o prijemu pošiljke");
-                this.dispose();
+                messageException = Controller.getInstance().addPotvrdaOPrijemuPosiljke(potvrda);
+                if(messageException==null){
+                    JOptionPane.showMessageDialog(this, "Upesno kreirana potvrda o prijemu pošiljke");
+                    this.dispose();
+                }else{
+                    JOptionPane.showMessageDialog(null, messageException, "Exception", JOptionPane.PLAIN_MESSAGE);
+                }
             }else if(operation.equals("UPDATE")){
-                Controller.getInstance().updatePotvrdaPosiljke(potvrda);
-                JOptionPane.showMessageDialog(this, "Upesno ažurirana potvrda o prijemu pošiljke");
-                this.dispose();
+                messageException = Controller.getInstance().updatePotvrdaPosiljke(potvrda);
+                if(messageException==null){
+                    JOptionPane.showMessageDialog(this, "Upesno ažurirana potvrda o prijemu pošiljke");
+                    this.dispose();
+                }else{
+                    JOptionPane.showMessageDialog(null, messageException, "Exception", JOptionPane.PLAIN_MESSAGE);
+                }
             }
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);

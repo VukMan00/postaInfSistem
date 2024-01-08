@@ -320,12 +320,17 @@ public class DostavljanjePosiljkeKorisniku extends javax.swing.JDialog {
         Integer sekunde = Integer.parseInt((String)cbSeconds.getSelectedItem());
         LocalDateTime vremeDostave = LocalDateTime.of(datumDostave.getYear(),datumDostave.getMonth().getValue(),datumDostave.getDayOfMonth(), sati, minuti, sekunde);
         if(checkPosiljka()){
+            String messageException;
             try {
                 dostavljanaPosiljka = new DostavljanjePosiljke(postar, posiljka.getPrimalac(), posiljka, datumDostave, vremeDostave);
                 billingAndPayment();
-                Controller.getInstance().addDostavljanjePosiljke(dostavljanaPosiljka);
-                JOptionPane.showMessageDialog(this, "Upesno ste predali pošiljku korisniku: " + posiljka.getPrimalac().getImePrezime());
-                populateTableDostavljanjePosiljke();
+                messageException = Controller.getInstance().addDostavljanjePosiljke(dostavljanaPosiljka);
+                if(messageException==null){
+                    JOptionPane.showMessageDialog(this, "Upesno ste predali pošiljku korisniku: " + posiljka.getPrimalac().getImePrezime());
+                    populateTableDostavljanjePosiljke();
+                }else{
+                    JOptionPane.showMessageDialog(null, messageException, "Exception", JOptionPane.PLAIN_MESSAGE);
+                }
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);
             }

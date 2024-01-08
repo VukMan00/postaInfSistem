@@ -159,12 +159,17 @@ public class PredajaNovca extends javax.swing.JDialog {
         // TODO add your handling code here:
         Integer ukupanNovac = sumOfAllPayment();
         razduzuje.setIznos(ukupanNovac);
+        String messageException;
         try {
-            Controller.getInstance().addRazduzuje(razduzuje);
-            JOptionPane.showMessageDialog(this, "Uspešno prebacivanje novca");
-            this.dispose();
+            messageException = Controller.getInstance().addRazduzuje(razduzuje);
+            if(messageException==null){
+                JOptionPane.showMessageDialog(this, "Uspešno prebacivanje novca");
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, messageException, "Exception", JOptionPane.PLAIN_MESSAGE);
+            }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Postar se za ovaj dostavni spisak već razdužio", "Exception", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);
         }
     }//GEN-LAST:event_btnPredajaNovcaActionPerformed
 

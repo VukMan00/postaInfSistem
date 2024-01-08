@@ -242,21 +242,25 @@ public class SaveKorisnik extends javax.swing.JDialog {
         brojUlice = getInputDataBrojUlice();
         korisnik = getInputDataKorisnik();
         try{
+            String messageException;
             if(operation.equals("CREATE")){
-                try{
-                    Controller.getInstance().addKorisnik(korisnik);
+                messageException = Controller.getInstance().addKorisnik(korisnik);
+                if(messageException==null){
                     JOptionPane.showMessageDialog(this, "Upesno kreiran korisnik");
                     this.dispose();
-                } catch (Exception  ex) {
-                    System.out.println(ex.getMessage());
+                }else{
                     Controller.getInstance().deleteBrojUlice(brojUlice);
                     Controller.getInstance().deleteAdresa(adresa);
-                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);
+                    JOptionPane.showMessageDialog(null, messageException, "Exception", JOptionPane.PLAIN_MESSAGE);
                 }
             }else if(operation.equals("UPDATE")){
-                Controller.getInstance().updateKorisnik(korisnik);
-                JOptionPane.showMessageDialog(this, "Upesno ažuriran korisnik");
-                this.dispose();
+                messageException = Controller.getInstance().updateKorisnik(korisnik);
+                if(messageException==null){
+                    JOptionPane.showMessageDialog(this, "Upesno ažuriran korisnik");
+                    this.dispose();
+                }else{
+                    JOptionPane.showMessageDialog(null, messageException, "Exception", JOptionPane.PLAIN_MESSAGE);
+                }
             }
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);

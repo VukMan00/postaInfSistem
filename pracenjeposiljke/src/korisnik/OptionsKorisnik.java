@@ -188,12 +188,17 @@ public class OptionsKorisnik extends javax.swing.JDialog {
         // TODO add your handling code here:
         Korisnik korisnik = getSelectedKorisnik();
         if(korisnik!=null){
+            String messageException;
             try {
-                Controller.getInstance().deleteKorisnik(korisnik);
-                JOptionPane.showMessageDialog(this, "Uspesno ste izbrisali korisnika");
-                populateTable();
+                messageException = Controller.getInstance().deleteKorisnik(korisnik);
+                if(messageException==null){
+                    JOptionPane.showMessageDialog(this, "Uspesno ste izbrisali korisnika");
+                    populateTable();
+                }else{
+                    JOptionPane.showMessageDialog(null, messageException, "Exception", JOptionPane.PLAIN_MESSAGE);
+                }
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Korisnik je u relaciji sa drugim tabelama", "Exception", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);
             }
         }
     }//GEN-LAST:event_btnDeleteKorisnikActionPerformed

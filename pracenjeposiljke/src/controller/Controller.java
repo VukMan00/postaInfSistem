@@ -33,6 +33,8 @@ import domain.Vozac;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -313,190 +315,221 @@ public class Controller {
         }
     }
     
-    public void addKorisnik(Korisnik korisnik) throws Exception{
+    public String addKorisnik(Korisnik korisnik) throws Exception {
         request = new Request(Operation.ADD, korisnik);
         sender.send(request);
         response = (Response) receiver.receive();
+        return response.getMessageException();
     }
     
-    public void addPosiljka(Adresnica adresnica) throws Exception{
+    public String addPosiljka(Adresnica adresnica) throws Exception{
         request = new Request(Operation.ADD,adresnica);
         sender.send(request);
         response = (Response) receiver.receive();
+        return response.getMessageException();
     }
     
-    public void addPotvrdaOPrijemuPosiljke(PotvrdaOPrijemuPosiljke potvrda) throws Exception{
+    public String addPotvrdaOPrijemuPosiljke(PotvrdaOPrijemuPosiljke potvrda) throws Exception{
         request = new Request(Operation.ADD, potvrda);
         sender.send(request);
         response = (Response)receiver.receive();
+        return response.getMessageException();
     }
     
-    public void addDostavniSpisak(DostavniSpisak dostavniSpisak) throws Exception{
+    public String addDostavniSpisak(DostavniSpisak dostavniSpisak) throws Exception{
         request = new Request(Operation.ADD, dostavniSpisak);
         sender.send(request);
         response = (Response)receiver.receive();
+        return response.getMessageException();
     }
     
-    public void addDostavljanjePosiljke(DostavljanjePosiljke dostavljanaPosiljka) throws Exception{
+    public String addDostavljanjePosiljke(DostavljanjePosiljke dostavljanaPosiljka) throws Exception{
         request = new Request(Operation.ADD, dostavljanaPosiljka);
         sender.send(request);
         response = (Response)receiver.receive();
+        return response.getMessageException();
     }
     
-    public void addPodaciPlacanja(PodaciPlacanja podaciPlacanja) throws Exception{
+    public String addPodaciPlacanja(PodaciPlacanja podaciPlacanja) throws Exception{
         request = new Request(Operation.ADD, podaciPlacanja);
         sender.send(request);
         response = (Response) receiver.receive();
+        return response.getMessageException();
     }
     
-    public void addUplatnica(Uplatnica uplatnica) throws Exception{
+    public String addUplatnica(Uplatnica uplatnica) throws Exception{
         request = new Request(Operation.ADD, uplatnica);
         sender.send(request);
         response = (Response) receiver.receive();
+        return response.getMessageException();
     }
     
-    public void addUplata(Uplata uplata) throws Exception {
+    public String addUplata(Uplata uplata) throws Exception {
         request = new Request(Operation.ADD, uplata);
         sender.send(request);
         response = (Response) receiver.receive();
+        return response.getMessageException();
     }
     
-    public void addRazduzuje(Razduzuje razduzuje) throws Exception{
+    public String addRazduzuje(Razduzuje razduzuje) throws Exception{
         request = new Request(Operation.ADD, razduzuje);
         sender.send(request);
         response = (Response) receiver.receive();
+        return response.getMessageException();
     }
     
-    public void addOtpremnica(Otpremnica otpremnica) throws Exception{
+    public String addOtpremnica(Otpremnica otpremnica) throws Exception{
         request = new Request(Operation.ADD, otpremnica);
         sender.send(request);
         response = (Response) receiver.receive();
+        return response.getMessageException();
     }
     
-    public void addUpravlja(Upravlja upravlja) throws Exception{
+    public String addUpravlja(Upravlja upravlja) throws Exception{
         request = new Request(Operation.ADD, upravlja);
         sender.send(request);
         response = (Response) receiver.receive();
+        return response.getMessageException();
     }
     
-    public void addVozac(Vozac vozac) throws Exception{
+    public String addVozac(Vozac vozac) throws Exception{
         request = new Request(Operation.ADD, vozac);
         sender.send(request);
         response = (Response) receiver.receive();
+        return response.getMessageException();
     }
     
-    public void addLinija(Linija linija) throws Exception{
+    public String addLinija(Linija linija) throws Exception{
         request = new Request(Operation.ADD, linija);
         sender.send(request);
         response = (Response) receiver.receive();
+        return response.getMessageException();
     }
     
-    public void addVreca(PopisPosiljakaUSVreci vreca) throws Exception{
+    public String addVreca(PopisPosiljakaUSVreci vreca) throws Exception{
         request = new Request(Operation.ADD, vreca);
         sender.send(request);
         response = (Response) receiver.receive();
+        return response.getMessageException();
     }
     
-    public void updateKorisnik(Korisnik korisnik) throws Exception {
+    public String updateKorisnik(Korisnik korisnik) throws Exception {
         request = new Request(Operation.UPDATE, korisnik);
         sender.send(request);
         response = (Response)receiver.receive();
+        return response.getMessageException();
     }
     
-    public void updatePosiljka(Adresnica adresnica) throws Exception{
+    public String updatePosiljka(Adresnica adresnica) throws Exception{
         request = new Request(Operation.UPDATE, adresnica);
         sender.send(request);
         response = (Response)receiver.receive();
+        return response.getMessageException();
     }
     
-    public void updatePotvrdaPosiljke(PotvrdaOPrijemuPosiljke potvrda) throws Exception{
+    public String updatePotvrdaPosiljke(PotvrdaOPrijemuPosiljke potvrda) throws Exception{
         request = new Request(Operation.UPDATE, potvrda);
         sender.send(request);
         response = (Response)receiver.receive();
+        return response.getMessageException();
     }
     
-    public void updateDostavniSpisak(DostavniSpisak dostavniSpisak) throws Exception{
+    public String updateDostavniSpisak(DostavniSpisak dostavniSpisak) throws Exception{
         request = new Request(Operation.UPDATE, dostavniSpisak);
         sender.send(request);
         response = (Response)receiver.receive();
+        return response.getMessageException();
     }
     
-    public void updateOtpremnica(Otpremnica otpremnica) throws Exception{
+    public String updateOtpremnica(Otpremnica otpremnica) throws Exception{
         request = new Request(Operation.UPDATE, otpremnica);
         sender.send(request);
         response = (Response)receiver.receive();
+        return response.getMessageException();
     }
     
-    public void updateUpravlja(Upravlja upravlja) throws Exception{
+    public String updateUpravlja(Upravlja upravlja) throws Exception{
         request = new Request(Operation.UPDATE, upravlja);
         sender.send(request);
         response = (Response)receiver.receive();
+        return response.getMessageException();
     }
     
-    public void updateVozac(Vozac vozac) throws Exception{
+    public String updateVozac(Vozac vozac) throws Exception{
         request = new Request(Operation.UPDATE, vozac);
         sender.send(request);
         response = (Response)receiver.receive();
+        return response.getMessageException();
     }
     
-    public void updateLinija(Linija linija) throws Exception{
+    public String updateLinija(Linija linija) throws Exception{
         request = new Request(Operation.UPDATE, linija);
         sender.send(request);
         response = (Response)receiver.receive();
+        return response.getMessageException();
     }
     
-    public void updateVreca(PopisPosiljakaUSVreci vreca) throws Exception{
+    public String updateVreca(PopisPosiljakaUSVreci vreca) throws Exception{
         request = new Request(Operation.UPDATE, vreca);
         sender.send(request);
         response = (Response) receiver.receive();
+        return response.getMessageException();
     }
     
-    public void deleteMesto(Mesto mesto) throws Exception{
+    public String deleteMesto(Mesto mesto) throws Exception{
         request = new Request(Operation.DELETE, mesto);
         sender.send(request);
         response = (Response) receiver.receive();
+        return response.getMessageException();
     }
 
-    public void deleteBrojUlice(BrojUlice brojUlice) throws Exception{
+    public String deleteBrojUlice(BrojUlice brojUlice) throws Exception{
         request = new Request(Operation.DELETE, brojUlice);
         sender.send(request);
         response = (Response) receiver.receive();
+        return response.getMessageException();
     }
 
-    public void deleteAdresa(Adresa adresa) throws Exception {
+    public String deleteAdresa(Adresa adresa) throws Exception {
         request = new Request(Operation.DELETE, adresa);
         sender.send(request);
         response = (Response) receiver.receive();
+        return response.getMessageException();
     }
 
-    public void deleteKorisnik(Korisnik korisnik) throws Exception {
+    public String deleteKorisnik(Korisnik korisnik) throws Exception {
         request = new Request(Operation.DELETE, korisnik);
         sender.send(request);
         response = (Response) receiver.receive();
+        return response.getMessageException();
     }
     
-    public void deletePosiljka(Adresnica adresnica) throws Exception{
+    public String deletePosiljka(Adresnica adresnica) throws Exception{
         request = new Request(Operation.DELETE, adresnica);
         sender.send(request);
         response = (Response) receiver.receive();
+        return response.getMessageException();
     }
 
-    public void deleteDostavniSpisak(DostavniSpisak dostavniSpisak) throws Exception{
+    public String deleteDostavniSpisak(DostavniSpisak dostavniSpisak) throws Exception{
         request = new Request(Operation.DELETE, dostavniSpisak);
         sender.send(request);
         response = (Response) receiver.receive();
+        return response.getMessageException();
     }
     
-    public void deleteUpravlja(Upravlja upravlja) throws Exception{
+    public String deleteUpravlja(Upravlja upravlja) throws Exception{
         request = new Request(Operation.DELETE, upravlja);
         sender.send(request);
         response = (Response) receiver.receive();
+        return response.getMessageException();
     }
     
-    public void deleteVreca(PopisPosiljakaUSVreci vreca) throws Exception{
+    public String deleteVreca(PopisPosiljakaUSVreci vreca) throws Exception{
         request = new Request(Operation.DELETE, vreca);
         sender.send(request);
         response = (Response) receiver.receive();
+        return response.getMessageException();
     }
 
 }

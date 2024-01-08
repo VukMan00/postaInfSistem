@@ -203,10 +203,15 @@ public class OptionsDostavniSpisak extends javax.swing.JDialog {
         // TODO add your handling code here:
         DostavniSpisak dostavniSpisak = getSelectedDostavniSpisak();
         if(dostavniSpisak!=null){
+            String messageException;
             try {
-                Controller.getInstance().deleteDostavniSpisak(dostavniSpisak);
-                JOptionPane.showMessageDialog(this, "Uspesno ste izbrisali dostavni spisak");
-                populateTable();
+                messageException = Controller.getInstance().deleteDostavniSpisak(dostavniSpisak);
+                if(messageException==null){
+                    JOptionPane.showMessageDialog(this, "Uspesno ste izbrisali dostavni spisak");
+                    populateTable();
+                }else{
+                    JOptionPane.showMessageDialog(null, messageException, "Exception", JOptionPane.PLAIN_MESSAGE);
+                }
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Dostavni  je u relaciji sa drugim tabelama", "Exception", JOptionPane.PLAIN_MESSAGE);
             }

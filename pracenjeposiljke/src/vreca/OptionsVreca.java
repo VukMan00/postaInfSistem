@@ -209,10 +209,15 @@ public class OptionsVreca extends javax.swing.JDialog {
         // TODO add your handling code here:
         PopisPosiljakaUSVreci vreca = getSelectedVreca();
         if(vreca!=null){
+            String messageException;
             try {
-                Controller.getInstance().deleteVreca(vreca);
-                JOptionPane.showMessageDialog(this, "Uspešno ste izbrisali vreću");
-                populateTable();
+                messageException = Controller.getInstance().deleteVreca(vreca);
+                if(messageException==null){
+                    JOptionPane.showMessageDialog(this, "Uspešno ste izbrisali vreću");
+                    populateTable();
+                }else{
+                    JOptionPane.showMessageDialog(null, messageException, "Exception", JOptionPane.PLAIN_MESSAGE);
+                }
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);
             }

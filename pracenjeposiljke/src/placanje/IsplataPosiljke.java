@@ -252,12 +252,20 @@ public class IsplataPosiljke extends javax.swing.JDialog {
         podaciPlacanja = getInpudDataPlacanja();
         uplatnica = getInputDataUplatnica();
         uplata = getInputDataUplata();
+        String messageExceptionPP;
+        String messageExceptionUplatnica;
+        String messageExceptionUplata;
         try {
-            Controller.getInstance().addPodaciPlacanja(podaciPlacanja);
-            Controller.getInstance().addUplatnica(uplatnica);
-            Controller.getInstance().addUplata(uplata);
-            JOptionPane.showMessageDialog(this, "Uspešna isplata primljene pošiljke");
-            this.dispose();
+            messageExceptionPP = Controller.getInstance().addPodaciPlacanja(podaciPlacanja);
+            messageExceptionUplatnica = Controller.getInstance().addUplatnica(uplatnica);
+            messageExceptionUplata = Controller.getInstance().addUplata(uplata);
+            if(messageExceptionPP==null && messageExceptionUplatnica==null && messageExceptionUplata==null){
+                JOptionPane.showMessageDialog(this, "Uspešna isplata primljene pošiljke");
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, messageExceptionPP + " " + messageExceptionUplatnica
+                        + " " + messageExceptionUplata, "Exception", JOptionPane.PLAIN_MESSAGE);
+            }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);
         }

@@ -10,12 +10,8 @@ import communication.Request;
 import communication.Response;
 import communication.Sender;
 import controller.Controller;
-import domain.Korisnik;
 import domain.UserLogin;
-import java.io.IOException;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -42,31 +38,17 @@ public class ProcessClientRequest extends Thread{
                 request = (Request) receiver.receive();
                 response = new Response();
                 switch(request.getOperation()){
-                    case LOGIN:
+                    case LOGIN -> {
                         UserLogin user = (UserLogin)request.getArgument();
                         response.setResult(Controller.getInstance().login(user));
-                        break;
-                    case ADD:
-                        Controller.getInstance().add(request.getArgument());
-                        break;
-                    case UPDATE:
-                        Controller.getInstance().update(request.getArgument());
-                        break;
-                    case DELETE:
-                        Controller.getInstance().delete(request.getArgument());
-                        break;
-                    case GET:
-                        response.setResult(Controller.getInstance().get(request.getArgument()));
-                        break;
-                    case GET_ALL:
-                        response.setResult(Controller.getInstance().getAll(request.getArgument()));
-                        break;
-                    case GET_ALL_CONDITION:
-                        response.setResult(Controller.getInstance().getAllWithCondition(request.getArgument()));
-                        break;
-                    case GET_ALL_PARTITION:
-                        response.setResult(Controller.getInstance().getAllWithPartition(request.getArgument()));
-                        break;
+                    }
+                    case ADD -> Controller.getInstance().add(request.getArgument());
+                    case UPDATE -> Controller.getInstance().update(request.getArgument());
+                    case DELETE -> Controller.getInstance().delete(request.getArgument());
+                    case GET -> response.setResult(Controller.getInstance().get(request.getArgument()));
+                    case GET_ALL -> response.setResult(Controller.getInstance().getAll(request.getArgument()));
+                    case GET_ALL_CONDITION -> response.setResult(Controller.getInstance().getAllWithCondition(request.getArgument()));
+                    case GET_ALL_PARTITION -> response.setResult(Controller.getInstance().getAllWithPartition(request.getArgument()));
                 }
                 
             } catch (Exception ex) {
@@ -74,11 +56,10 @@ public class ProcessClientRequest extends Thread{
                     System.out.println("Nema odgovora!");
                 }
                 else{
-                    System.out.println(ex.getMessage());
                     response.setException(ex);
+                    response.setMessageException(ex.getMessage());
                 }
             }
-            
            sender.send(response);
         }
     }

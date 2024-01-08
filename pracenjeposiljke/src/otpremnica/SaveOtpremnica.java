@@ -217,14 +217,24 @@ public class SaveOtpremnica extends javax.swing.JDialog {
         try {
             // TODO add your handling code here:
             otpremnica = getInputDataOtpremnice();
+            String messageException;
             if(operation.equals("CREATE")){
-                Controller.getInstance().addOtpremnica(otpremnica);
-                JOptionPane.showMessageDialog(this, "Uspesno ste kreirali otpremnicu");
-                this.dispose();
+                messageException = Controller.getInstance().addOtpremnica(otpremnica);
+                if(messageException==null){
+                    JOptionPane.showMessageDialog(this, "Uspesno ste kreirali otpremnicu");
+                    this.dispose();
+                }else{
+                    JOptionPane.showMessageDialog(null, messageException, "Exception", JOptionPane.PLAIN_MESSAGE);
+                }
+                
             }else if(operation.equals("UPDATE")){
-                Controller.getInstance().updateOtpremnica(otpremnica);
-                JOptionPane.showMessageDialog(this, "Uspesno ste ažurirali otpremnicu");
-                this.dispose();
+                messageException = Controller.getInstance().updateOtpremnica(otpremnica);
+                if(messageException==null){
+                    JOptionPane.showMessageDialog(this, "Uspesno ste ažurirali otpremnicu");
+                    this.dispose();
+                }else{
+                    JOptionPane.showMessageDialog(null, messageException, "Exception", JOptionPane.PLAIN_MESSAGE);
+                }
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Exception", JOptionPane.PLAIN_MESSAGE);
