@@ -285,6 +285,8 @@ public class SaveOtpremnica extends javax.swing.JDialog {
         txtObracunskiRadnik.setText(obracunskiRadnik.getImePrezime());
         txtUplatilac.setText(uplatilac.getImePrezime());
         txtIznos.setText(uplatnica.getIznos().toString() + " " + "RSD");
+        cbPosta.addItem(posta);
+        cbPosta.setSelectedItem(posta);
         
         if(operation.equals("CREATE")){
             txtBrojUPL.setEditable(true);
